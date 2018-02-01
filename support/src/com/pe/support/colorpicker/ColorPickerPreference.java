@@ -63,12 +63,6 @@ public class ColorPickerPreference extends Preference implements
 
     private boolean mShowLedPreview;
 
-    // if we return -6, button is not enabled
-    static final String SETTINGS_NS = "http://schemas.android.com/apk/res/com.android.settings";
-    static final int DEF_VALUE_DEFAULT = -6;
-    boolean mUsesDefaultButton = false;
-    int mDefValue = -1;
-
     private EditText mEditText;
 
     public ColorPickerPreference(Context context) {
