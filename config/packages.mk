@@ -20,3 +20,6 @@ PRODUCT_PACKAGES += \
     NavBarGesturalWideBackNoPillOverlay \
     NavBarGesturalExtraWideBackNoPillOverlay
 
+# Required packages
+PRODUCT_PACKAGES += \
+    AOSIPOverlayStub \
