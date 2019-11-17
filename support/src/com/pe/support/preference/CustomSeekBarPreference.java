@@ -87,7 +87,8 @@ public class CustomSeekBarPreference extends Preference implements SeekBar.OnSee
 
         a.recycle();
         mSeekBar = new SeekBar(context, attrs);
-        mSeekBar.setMax(mMax - mMin);
+        mSeekBar.setMax(mMax);
+        mSeekBar.setMin(mMin);
         mSeekBar.setOnSeekBarChangeListener(this);
         setLayoutResource(R.layout.preference_custom_seekbar);
     }
@@ -161,7 +162,7 @@ public class CustomSeekBarPreference extends Preference implements SeekBar.OnSee
             });
         }
 
-        mSeekBar.setProgress(mCurrentValue - mMin);
+        mSeekBar.setProgress(mCurrentValue);
         mTitle = (TextView) view.findViewById(android.R.id.title);
 
         view.setDividerAllowedAbove(false);
@@ -205,12 +206,13 @@ public class CustomSeekBarPreference extends Preference implements SeekBar.OnSee
 
     public void setMax(int max) {
         mMax = max;
-        mSeekBar.setMax(mMax - mMin);
+        mSeekBar.setMax(mMax);
     }
 
     public void setMin(int min) {
         mMin = min;
-        mSeekBar.setMax(mMax - mMin);
+        mSeekBar.setMin(mMin);
+        mSeekBar.setMax(mMax);
     }
 
     public void setIntervalValue(int value) {
@@ -223,17 +225,13 @@ public class CustomSeekBarPreference extends Preference implements SeekBar.OnSee
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        int newValue = progress + mMin;
-        if (newValue > mMax)
-            newValue = mMax;
-        else if (newValue < mMin)
-            newValue = mMin;
-        else if (mInterval != 1 && newValue % mInterval != 0)
+        int newValue = progress;
+        if (mInterval != 1 && newValue % mInterval != 0)
             newValue = Math.round(((float) newValue) / mInterval) * mInterval;
 
         // change rejected, revert to the previous value
         if (!callChangeListener(newValue)) {
-            seekBar.setProgress(mCurrentValue - mMin);
+            seekBar.setProgress(mCurrentValue);
             return;
         }
         // change accepted, store it
@@ -246,7 +244,7 @@ public class CustomSeekBarPreference extends Preference implements SeekBar.OnSee
 
     public void refresh(int newValue) {
         // this will trigger onProgressChanged and refresh everything
-        mSeekBar.setProgress(newValue - mMin);
+        mSeekBar.setProgress(newValue);
     }
 
     @Override
