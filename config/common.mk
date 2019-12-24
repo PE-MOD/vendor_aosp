@@ -147,3 +147,6 @@ include vendor/google/customization/config.mk
 
 # Packages
 include vendor/aosp/config/packages.mk
+
+# Themes
+include vendor/aosp/config/accents.mk
