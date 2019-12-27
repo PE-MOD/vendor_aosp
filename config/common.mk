@@ -144,3 +144,6 @@ include vendor/pixelstyle/config.mk
 include vendor/google/customization/config.mk
 
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
+
+# Packages
+include vendor/aosp/config/packages.mk
